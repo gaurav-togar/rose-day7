@@ -1,71 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Happy Rose Day 🌹</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
-    body{
-      margin:0;
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background:linear-gradient(to right,#ff9a9e,#fad0c4);
-      font-family:Arial;
-      text-align:center;
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffd6e8, #fff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Georgia", serif;
+      overflow: hidden;
     }
-    .box{
-      background:white;
-      padding:25px;
-      border-radius:20px;
-      max-width:400px;
-      box-shadow:0 15px 30px rgba(0,0,0,.2);
+
+    .card {
+      background: white;
+      padding: 35px;
+      border-radius: 20px;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      z-index: 2;
     }
-    h1{color:#d6336c;}
-    p{color:#333;font-size:15px;line-height:1.6;}
-    img{width:180px;margin-top:15px;border-radius:12px;}
+
+    h1 {
+      color: #c9184a;
+      margin-bottom: 5px;
+    }
+
+    h3 {
+      color: #555;
+      font-weight: normal;
+      margin-top: 0;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      margin: 20px 0;
+    }
+
+    p {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    #typing {
+      min-height: 120px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 22px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      background: #ff4f7a;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e63963;
+    }
+
+    #surprise {
+      display: none;
+      margin-top: 20px;
+      font-size: 18px;
+      color: #b5179e;
+    }
+
+    .from {
+      margin-top: 30px;
+      font-style: italic;
+      font-size: 16px;
+      color: #555;
+    }
+
+    /* Falling roses */
+    .rose {
+      position: fixed;
+      top: -20px;
+      font-size: 24px;
+      animation: fall linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
   </style>
 </head>
+
 <body>
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7f1b0b2e7e.mp3" type="audio/mpeg">
-</audio>
-<div class="box">
-  <h1>🌹 Happy Rose Day 🌹</h1>
-  <h3>Khushi ji</h3>
 
-  <p>
-    Happy Rose Day to the girl who makes life brighter just by being in it 🌹<br><br>
-    Like a rose, you bring color to dull days, comfort to hard moments,
-    and a smile that feels like home.<br><br>
-    I’m lucky to have a best friend like you — pure, strong, and truly special.
-  </p>
+  <!-- 🎶 Background Music -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7f1b0b2e7e.mp3" type="audio/mpeg">
+  </audio>
 
-  <img src="Rose day 07.png" alt="Rose">
-</div>
-<script>
-  function createRose() {
-    const rose = document.createElement("div");
-    rose.innerHTML = "🌹";
-    rose.style.position = "fixed";
-    rose.style.left = Math.random() * 100 + "vw";
-    rose.style.top = "-20px";
-    rose.style.fontSize = Math.random() * 20 + 20 + "px";
-    rose.style.animation = "fall 6s linear";
-    document.body.appendChild(rose);
+  <div class="card">
+    🌹
+    <h1>Happy Rose Day</h1>
+    <h3>Khushi ji</h3>
 
-    setTimeout(() => rose.remove(), 6000);
-  }
+    <!-- IMAGE -->
+    <img src="Rose day 07.png" alt="Rose Day">
 
-  setInterval(createRose, 500);
-</script>
+    <!-- TYPING TEXT -->
+    <p id="typing"></p>
 
-<style>
-@keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-  }
-}
-</style>
+    <!-- BUTTON -->
+    <button onclick="showSurprise()">💝 Click for Surprise</button>
+
+    <!-- HIDDEN MESSAGE -->
+    <p id="surprise">
+      🌹 You’re not just my best friend, Khushi ji…<br>
+      you’re someone who makes every day softer, brighter, and happier 💖<br>
+      Always stay the way you are ✨
+    </p>
+
+    <!-- SIGNATURE -->
+    <div class="from">— From Gaurav 🌹</div>
+  </div>
+
+  <script>
+    /* Typing animation */
+    const text = "Happy Rose Day to the girl who makes life brighter just by being in it 🌹\n\nLike a rose, you bring color to dull days, comfort to hard moments, and a smile that feels like home.\n\nI’m lucky to have a best friend like you — pure, strong, and truly special.";
+    let i = 0;
+    const speed = 40;
+
+    function typeText() {
+      if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+        i++;
+        setTimeout(typeText, speed);
+      }
+    }
+    typeText();
+
+    /* Surprise message */
+    function showSurprise() {
+      document.getElementById("surprise").style.display = "block";
+    }
+
+    /* Falling roses */
+    function createRose() {
+      const rose = document.createElement("div");
+      rose.classList.add("rose");
+      rose.innerHTML = "🌹";
+      rose.style.left = Math.random() * 100 + "vw";
+      rose.style.fontSize = Math.random() * 20 + 20 + "px";
+      rose.style.animationDuration = Math.random() * 3 + 5 + "s";
+      document.body.appendChild(rose);
+
+      setTimeout(() => {
+        rose.remove();
+      }, 8000);
+    }
+
+    setInterval(createRose, 500);
+  </script>
+
 </body>
 </html>
