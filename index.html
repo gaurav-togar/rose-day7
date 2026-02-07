@@ -51,7 +51,7 @@
     }
 
     #typing {
-      min-height: 120px;
+      min-height: 130px;
     }
 
     button {
@@ -103,8 +103,8 @@
 
 <body>
 
-  <!-- 🎶 Background Music -->
-  <audio autoplay loop>
+  <!-- 🎶 Background Music (plays on button click) -->
+  <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7f1b0b2e7e.mp3" type="audio/mpeg">
   </audio>
 
@@ -141,16 +141,18 @@
 
     function typeText() {
       if (i < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+        document.getElementById("typing").innerHTML +=
+          text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
         i++;
         setTimeout(typeText, speed);
       }
     }
     typeText();
 
-    /* Surprise message */
+    /* Surprise + Music */
     function showSurprise() {
       document.getElementById("surprise").style.display = "block";
+      document.getElementById("bgMusic").play();
     }
 
     /* Falling roses */
@@ -163,9 +165,7 @@
       rose.style.animationDuration = Math.random() * 3 + 5 + "s";
       document.body.appendChild(rose);
 
-      setTimeout(() => {
-        rose.remove();
-      }, 8000);
+      setTimeout(() => rose.remove(), 8000);
     }
 
     setInterval(createRose, 500);
