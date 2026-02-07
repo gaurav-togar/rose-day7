@@ -41,6 +41,29 @@
 
   <img src="Rose day 07.png" alt="Rose">
 </div>
+<script>
+  function createRose() {
+    const rose = document.createElement("div");
+    rose.innerHTML = "🌹";
+    rose.style.position = "fixed";
+    rose.style.left = Math.random() * 100 + "vw";
+    rose.style.top = "-20px";
+    rose.style.fontSize = Math.random() * 20 + 20 + "px";
+    rose.style.animation = "fall 6s linear";
+    document.body.appendChild(rose);
 
+    setTimeout(() => rose.remove(), 6000);
+  }
+
+  setInterval(createRose, 500);
+</script>
+
+<style>
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+</style>
 </body>
 </html>
